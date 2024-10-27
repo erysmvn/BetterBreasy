@@ -14,9 +14,14 @@ struct BackgroundView: View {
 }
 
 struct MainView: View {
+    @StateObject var viewModel = MainViewViewModel()
+    
     var body: some View {
-        NavigationView {
-            LoginView().navigationTitle("Better-Breasy☕")
+        if viewModel.isSignedIn, !viewModel.currentUserId.isEmpty {
+            // sign in state
+            VendingMachinesView()
+        } else {
+            LoginView()
         }
     }
 }

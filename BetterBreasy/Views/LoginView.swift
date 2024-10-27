@@ -34,37 +34,37 @@ struct LoginView: View {
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
-
-    @State var email = ""
-    @State var password = ""
+    
+    @StateObject var viewModel = LoginViewViewModel()
 
     var body: some View {
-        VStack {
-            // login form
-            
-            Form {
-                TextField("Email", text: $email).textFieldStyle(RoundedBorderTextFieldStyle())
-                SecureField("Password", text: $password).textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                Button {
-                    // log in
-                } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10).foregroundColor(Color.blue)
-                        Text("Log in").bold().foregroundColor(Color.white)
-                    }
-                }
-            }.foregroundColor(Color(hex: "#EAE0D5"))
-            
-            // create account
+        NavigationView {
             VStack {
-                Text("Don't have an acc yet?")
-                Button("Register here") {
-                    // jump to registration form
-                }
-            }.padding(.bottom, 15)
-            Spacer()
-        }.padding(.top, 50)
+                // login form
+                
+                Form {
+                    if !viewModel.errMsg.isEmpty {
+                        Text(viewModel.errMsg).foregroundColor(Color.red)
+                    }
+                    Spacer()
+                    TextField("Email", text: $viewModel.email).textFieldStyle(.roundedBorder).autocapitalization(.none).autocorrectionDisabled()
+
+                    SecureField("Password", text: $viewModel.password).textFieldStyle(.roundedBorder)
+                    
+                    // re-usable button
+                    ButtonForms(title: "Log in", background: .blue){
+                        viewModel.login()
+                    }.padding()
+                }.scrollContentBackground(.hidden)
+                
+                // create account
+                VStack {
+                    Text("Don't have an acc yet?")
+                    NavigationLink("Register here", destination: RegisterView()) // jump to register form
+                }.padding(.bottom, 15)
+                Spacer().navigationTitle("Better-Breasy☕")
+            }.padding(.top, 180)
+        }
     }
 }
 
