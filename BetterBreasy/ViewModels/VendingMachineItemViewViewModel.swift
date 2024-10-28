@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+/// new model for single item of view
+class VendingMachineItemViewViewModel: ObservableObject {
+    init() {}
+}

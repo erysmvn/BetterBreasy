@@ -8,12 +8,33 @@
 import SwiftUI
 
 struct VendingMachinesView: View {
+    @StateObject var viewModel = ListViewViewModel()
+    
+    private let userId: String
+    
+    init(userId: String) {
+        self.userId = userId
+    }
+    
     var body: some View {
-        Text("Welcome back!")
+        NavigationView {
+            VStack {
+                
+            }.navigationTitle("List")
+                .toolbar {
+                    Button {
+                        viewModel.showingNewItemView = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }.sheet(isPresented: $viewModel.showingNewItemView) {
+                    newItemView(newItemPresented: $viewModel.showingNewItemView)
+                }
+        }
     }
 }
 
 #Preview {
-    VendingMachinesView()
+    VendingMachinesView(userId: "") 
 }
  

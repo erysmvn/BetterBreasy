@@ -18,10 +18,22 @@ struct MainView: View {
     
     var body: some View {
         if viewModel.isSignedIn, !viewModel.currentUserId.isEmpty {
-            // sign in state
-            VendingMachinesView()
+            accountView
         } else {
             LoginView()
+        }
+    }
+    
+    // abstracting
+    @ViewBuilder
+    var accountView: some View {
+        TabView {
+            VendingMachinesView(userId: viewModel.currentUserId).tabItem() {
+                Label("Home", systemImage: "house")
+            }
+            ProfileView().tabItem() {
+                Label("Account", systemImage: "person.circle")
+            }
         }
     }
 }

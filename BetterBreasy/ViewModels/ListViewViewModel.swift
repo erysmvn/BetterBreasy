@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+
+/// new model for list of item view
+/// primary tab
+class ListViewViewModel: ObservableObject {
+    @Published var showingNewItemView = false
+    
+    init() {}
+}
+
