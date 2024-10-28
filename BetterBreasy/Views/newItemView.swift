@@ -25,10 +25,9 @@ struct newItemView: View {
                 TextField("Number", text: $viewModel.number)
                 // type
                 VStack {
-                    Picker("Type", selection: $selectedType) {
-                        ForEach(Types, id: \.self) { //Type in
-                            //Text(Types.rawValue.capitalized)
-                            Text($0)
+                    Picker("Type", selection: $viewModel.type) {
+                        ForEach(Types, id: \.self) { type in
+                            Text(type.capitalized)
                         }
                     }
                 }

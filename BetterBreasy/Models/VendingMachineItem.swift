@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct VendingMachineItem: Codable, Identifiable {
+    let id: String
+    let number: String
+    let type: String
+}
