@@ -8,5 +8,7 @@
 import Foundation
 
 class ConnectionViewViewModel: ObservableObject {
+    @Published var showingConnection = false
+    
     init() {}
 }

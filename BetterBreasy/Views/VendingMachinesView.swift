@@ -23,32 +23,17 @@ struct VendingMachinesView: View {
                     ForEach(items) { item in
                         VStack {
                             if item.type == "Coffee" {
-                                Text("☕").padding(.all, 20)
-                                    .font(.system(size: 40))
-                                    .background(
-                                    RoundedRectangle(cornerRadius: 10)
-                                                .stroke(Color.black, lineWidth: 0))
-                                .background(RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color.gray)
-                                    .opacity(0.5))
+                                MachineItem(icon: "☕") {
+                                    
+                                }
                             } else if item.type == "Snacks" {
-                                Text("🍫").padding(.all, 20)
-                                    .font(.system(size: 40))
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .stroke(Color.black, lineWidth: 0))
-                                    .background(RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color.gray)
-                                        .opacity(0.5))
+                                MachineItem(icon: "🍫") {
+                                    
+                                }
                             } else if item.type == "Drinks" {
-                                Text("🥤").padding(.all, 20)
-                                    .font(.system(size: 40))
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 10)
-                                            .stroke(Color.black, lineWidth: 0))
-                                    .background(RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color.gray)
-                                        .opacity(0.5))
+                                MachineItem(icon: "🥤") {
+                                    
+                                }
                             }
                             Text(item.number).bold()
                                 .font(.subheadline)
@@ -56,7 +41,7 @@ struct VendingMachinesView: View {
                             }
                         }
                     }.listStyle(PlainListStyle())
-            }.navigationTitle("List")
+            }.navigationTitle("Available machines:")
                 .toolbar {
                     Button {
                         viewModel.showingNewItemView = true
