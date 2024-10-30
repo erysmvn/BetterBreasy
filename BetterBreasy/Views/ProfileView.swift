@@ -16,13 +16,27 @@ struct ProfileView: View {
             VStack {
                 if let user = viewModel.user {
                     Spacer()
-                    Image(systemName: "person.circle").resizable()
+                    Image(systemName: "person.text.rectangle").resizable()
                         .aspectRatio(contentMode: .fit)
-                        .foregroundColor(Color.blue)
+                        .foregroundColor(Color.gray)
                         .frame(width: 125, height: 125)
                         .padding()
                     
                     VStack {
+                        HStack {
+                            Spacer()
+                            Text("Balance: ").bold()
+                            Text(String(format: "%.2f €", user.balance))
+                            Button {
+                                // action
+                            } label: {
+                                Text("Add to balance").foregroundColor(Color.blue)
+                                /*RoundedRectangle(cornerRadius: 20)
+                                    .foregroundColor(Color.blue)
+                                    .frame(width: 120, height: 40)*/
+                            }
+                            Spacer()
+                        }
                         HStack {
                             Text("Joined: ").bold()
                             Text("\(Date(timeIntervalSince1970: user.joined).formatted(date: .abbreviated, time: .shortened))")

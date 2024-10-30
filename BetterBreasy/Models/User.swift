@@ -11,5 +11,6 @@ struct User: Codable, Identifiable {
     let id: String
     let username: String
     let email: String
+    let balance: Float // how much on the app
     let joined: TimeInterval // when joined
 }

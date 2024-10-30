@@ -12,9 +12,13 @@ struct VendingMachinesView: View {
     @StateObject var viewModel = ListViewViewModel()
     @FirestoreQuery var items: [VendingMachineItem]
     
+    @StateObject var userSigned = MainViewViewModel()
+    
     init(userId: String) {
         self._items = FirestoreQuery(collectionPath: "users/\(userId)/machines")
     }
+    
+    @State private var isPresentingConnection: Bool = false
     
     var body: some View {
         NavigationView {
@@ -24,15 +28,15 @@ struct VendingMachinesView: View {
                         VStack {
                             if item.type == "Coffee" {
                                 MachineItem(icon: "☕") {
-                                    
+                                    isPresentingConnection = true
                                 }
                             } else if item.type == "Snacks" {
                                 MachineItem(icon: "🍫") {
-                                    
+                                    isPresentingConnection = true
                                 }
                             } else if item.type == "Drinks" {
                                 MachineItem(icon: "🥤") {
-                                    
+                                    isPresentingConnection = true
                                 }
                             }
                             Text(item.number).bold()
@@ -42,7 +46,9 @@ struct VendingMachinesView: View {
                         }
                     }.listStyle(PlainListStyle())
             }.navigationTitle("Available machines:")
-                .toolbar {
+            if userSigned.currentUserId == "gDTSC8vpmCS51lWwPi8ZedEEUQt2" { // superuser
+                NavigationView{
+                }.toolbar {
                     Button {
                         viewModel.showingNewItemView = true
                     } label: {
@@ -51,6 +57,9 @@ struct VendingMachinesView: View {
                 }.sheet(isPresented: $viewModel.showingNewItemView) {
                     newItemView(newItemPresented: $viewModel.showingNewItemView)
                 }
+            }
+        }.sheet(isPresented: $isPresentingConnection) {
+            ConnectionView(isPresentingConnection: $viewModel.showingConnection)
         }
     }
 }

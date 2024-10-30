@@ -12,6 +12,7 @@ import Foundation
 /// primary tab
 class ListViewViewModel: ObservableObject {
     @Published var showingNewItemView = false
+    @Published var showingConnection = false
     
     init() {}
 }
