@@ -12,10 +12,17 @@ struct VendingMachinesView: View {
     @StateObject var viewModel = ListViewViewModel()
     @FirestoreQuery var items: [VendingMachineItem]
     
-    @StateObject var userSigned = MainViewViewModel()
-    
+    @StateObject var userSigned =  ProfileViewViewModel()
+    var isSuperUser: Bool {
+        return userSigned.user?.superuser ?? false
+    }
+    /*
     init(userId: String) {
         self._items = FirestoreQuery(collectionPath: "users/\(userId)/machines")
+    }
+    */
+    init() {
+        self._items = FirestoreQuery(collectionPath: "machines")
     }
     
     @State private var isPresentingConnection: Bool = false
@@ -46,17 +53,19 @@ struct VendingMachinesView: View {
                         }
                     }.listStyle(PlainListStyle())
             }.navigationTitle("Available machines:")
-            if userSigned.currentUserId == "gDTSC8vpmCS51lWwPi8ZedEEUQt2" { // superuser
-                NavigationView{
-                }.toolbar {
+                .onAppear {
+                    userSigned.fetchUser()
+                }
+                .toolbar {
+                if isSuperUser { // only SuperUsers can add machhines
                     Button {
                         viewModel.showingNewItemView = true
                     } label: {
                         Image(systemName: "plus")
                     }
+                }
                 }.sheet(isPresented: $viewModel.showingNewItemView) {
                     newItemView(newItemPresented: $viewModel.showingNewItemView)
-                }
             }
         }.sheet(isPresented: $viewModel.showingConnection) {
             ConnectionView(isPresentingConnection: $viewModel.showingConnection)
@@ -65,6 +74,7 @@ struct VendingMachinesView: View {
 }
 
 #Preview {
-    VendingMachinesView(userId: "gDTSC8vpmCS51lWwPi8ZedEEUQt2")
+    //VendingMachinesView(userId: "gDTSC8vpmCS51lWwPi8ZedEEUQt2")
+    VendingMachinesView()
 }
  

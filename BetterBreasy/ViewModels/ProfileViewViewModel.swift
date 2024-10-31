@@ -27,6 +27,7 @@ class ProfileViewViewModel: ObservableObject {
                     id: data["id"] as? String ?? "",
                     username: data["username"] as? String ?? "",
                     email: data["email"] as? String ?? "",
+                    superuser: data["superuser"] as? Bool ?? false,
                     balance: data["balance"] as? Float ?? 0,
                     joined: data["joined"] as? TimeInterval ?? 0
                 )

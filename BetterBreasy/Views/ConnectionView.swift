@@ -76,6 +76,8 @@ struct ConnectionView: View {
                         currentNum = currentNum + "9"
                     }
                 }
+            }.onAppear {
+                currentUser.fetchUser()
             }
             
             HStack {
@@ -83,7 +85,7 @@ struct ConnectionView: View {
                     if currentNum.count < 2 {
                         errMsg = "Please insert 2 digits"
                         viewModel.showAlert = true
-                    } else if balance <= 0.00 {
+                    } else if balance <= 0.00 { // WARN: balance is for test, use userBalance
                         errMsg = "No enough credit"
                         viewModel.showAlert = true
                     } else {

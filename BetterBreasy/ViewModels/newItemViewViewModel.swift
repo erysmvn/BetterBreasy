@@ -35,11 +35,15 @@ class newItemViewViewModel: ObservableObject {
         
         // save the model
         let db = Firestore.firestore()
+        db.collection("machines")
+            .document(newId)
+            .setData(newItem.asDictionary()) // dictionary
+        /*let db = Firestore.firestore()
         db.collection("users")
             .document(uId)
             .collection("machines")
             .document(newId)
-            .setData(newItem.asDictionary()) // dictionary
+            .setData(newItem.asDictionary()) // dictionary*/
     }
     
     var canSave: Bool {

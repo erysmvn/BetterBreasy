@@ -35,6 +35,7 @@ class RegisterViewViewModel: ObservableObject {
         let newUser = User(id: id,
                            username: username,
                            email: email,
+                           superuser: false,
                            balance: 0.00,
                            joined: Date().timeIntervalSince1970)
         
