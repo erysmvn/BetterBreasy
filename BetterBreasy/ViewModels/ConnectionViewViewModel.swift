@@ -8,13 +8,13 @@
 import Foundation
 
 class ConnectionViewViewModel: ObservableObject {
-    @Published var showingConnection = false
+    @Published var itemNumber = ""
+    @Published var currentBalance: Double = 0.00
+    @Published var showAlert = false
     
     init() {}
     
-    var canBuy : Bool {
-        // check if balance is != to 0.00 $
-        // check if num of digits is == 2
-        return true
+    func buyItem() {
+        // buy item
     }
 }

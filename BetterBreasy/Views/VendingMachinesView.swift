@@ -28,15 +28,15 @@ struct VendingMachinesView: View {
                         VStack {
                             if item.type == "Coffee" {
                                 MachineItem(icon: "☕") {
-                                    isPresentingConnection = true
+                                    viewModel.showingConnection = true // use this one on the model file, it cant be private!!!!!
                                 }
                             } else if item.type == "Snacks" {
                                 MachineItem(icon: "🍫") {
-                                    isPresentingConnection = true
+                                    viewModel.showingConnection = true
                                 }
                             } else if item.type == "Drinks" {
                                 MachineItem(icon: "🥤") {
-                                    isPresentingConnection = true
+                                    viewModel.showingConnection = true
                                 }
                             }
                             Text(item.number).bold()
@@ -58,7 +58,7 @@ struct VendingMachinesView: View {
                     newItemView(newItemPresented: $viewModel.showingNewItemView)
                 }
             }
-        }.sheet(isPresented: $isPresentingConnection) {
+        }.sheet(isPresented: $viewModel.showingConnection) {
             ConnectionView(isPresentingConnection: $viewModel.showingConnection)
         }
     }

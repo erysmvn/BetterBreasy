@@ -11,7 +11,14 @@ struct ConnectionView: View {
     @StateObject var viewModel = ConnectionViewViewModel()
     @Binding var isPresentingConnection: Bool
     
+    @StateObject var currentUser = ProfileViewViewModel()
+    var userBalance: Double {
+        return Double(currentUser.user?.balance ?? 0.00)
+    }
+    
     @State private var currentNum: String = ""
+    @State private var errMsg: String = ""
+    @State private var balance: Double = 2 // test
     
     var body: some View {
         VStack {
@@ -73,9 +80,18 @@ struct ConnectionView: View {
             
             HStack {
                 ConnItemSpecial(number: "✓", textSize: 35, background: .green) {
-                    // check if can buy
-                    // set balance to 0
-                    isPresentingConnection = false
+                    if currentNum.count < 2 {
+                        errMsg = "Please insert 2 digits"
+                        viewModel.showAlert = true
+                    } else if balance <= 0.00 {
+                        errMsg = "No enough credit"
+                        viewModel.showAlert = true
+                    } else {
+                        viewModel.itemNumber = currentNum
+                        viewModel.currentBalance = userBalance
+                        // call the buy func
+                        isPresentingConnection = false
+                    }
                 }
                 ConnItem(number: "0") {
                     if currentNum.count < 2 {
@@ -89,6 +105,11 @@ struct ConnectionView: View {
                 }
             }
         }.padding(.top, 30)
+            .alert(isPresented: $viewModel.showAlert) {
+                Alert(title: Text("Error"),
+                      message: Text(errMsg)
+                )
+            }
     }
 }
 
