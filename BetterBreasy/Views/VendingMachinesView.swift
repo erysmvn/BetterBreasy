@@ -17,6 +17,10 @@ struct VendingMachinesView: View {
         return userSigned.user?.superuser ?? false
     }
     
+    var userBalance: Float {
+        return userSigned.user?.balance ?? 0.00
+    }
+    
     init() {
         self._items = FirestoreQuery(collectionPath: "machines")
     }
@@ -26,6 +30,10 @@ struct VendingMachinesView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Text(String(format: "Balance: %.2f €", userBalance))
+                    .font(.title)
+                    .bold()
+                    .padding(.bottom, 30)
                 HStack(spacing: 20) {
                     ForEach(items) { item in
                         VStack {
@@ -48,6 +56,7 @@ struct VendingMachinesView: View {
                             }
                         }
                     }.listStyle(PlainListStyle())
+                    .padding(.bottom, 150)
             }.navigationTitle("Available machines:")
                 .onAppear {
                     userSigned.fetchUser()

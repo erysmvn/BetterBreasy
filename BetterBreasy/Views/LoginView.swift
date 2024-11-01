@@ -39,49 +39,52 @@ struct LoginView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Login Here:")
-                    .font(.system(size: 50))
-                    .bold()
-                    .padding(.bottom, 2)
-                Text("Better-Breasy")
-                    .font(.system(size: 25))
-                    .bold()
-                    .opacity(0.60)
-                    .padding(.bottom, 10)
-                Spacer()
-                // login form
-                Form {
-                    if !viewModel.errMsg.isEmpty {
-                        Text(viewModel.errMsg).foregroundColor(Color.red)
-                    }
-                    Spacer()
-                    TextField("Email", text: $viewModel.email).textFieldStyle(.roundedBorder).autocapitalization(.none).autocorrectionDisabled()
-
-                    SecureField("Password", text: $viewModel.password).textFieldStyle(.roundedBorder)
-                    
-                    // re-usable button
-                    ButtonForms(title: "Log in", background: .blue){
-                        viewModel.login()
-                    }.padding()
-                }.scrollContentBackground(.hidden)
-                
-                if let image = UIImage(named: "pngIcon") {
-                            Image(uiImage: image)
-                                .resizable()
-                                .frame(width: 160, height: 160)
-                                .aspectRatio(contentMode: .fit)
-                        } else {
-                            Text("Image not found")
-                        }
-
-                
-                // create account
+            ZStack {
                 VStack {
-                    Text("Don't have an acc yet?")
-                    NavigationLink("Register here", destination: RegisterView()) // jump to register form
-                }.padding(.bottom, 15)
-            }.padding(.top, 180)
+                    Text("Login Here:")
+                        .font(.system(size: 50))
+                        .bold()
+                        .padding(.bottom, 2)
+                    Text("Better-Breasy")
+                        .font(.system(size: 25))
+                        .bold()
+                        .opacity(0.60)
+                        .padding(.bottom, 10)
+                    Spacer()
+                    // login form
+                    Form {
+                        if !viewModel.errMsg.isEmpty {
+                            Text(viewModel.errMsg).foregroundColor(Color.red)
+                        }
+                        Spacer()
+                        TextField("Email", text: $viewModel.email).textFieldStyle(.roundedBorder).autocapitalization(.none).autocorrectionDisabled()
+                        
+                        SecureField("Password", text: $viewModel.password).textFieldStyle(.roundedBorder)
+                        
+                        // re-usable button
+                        ButtonForms(title: "Log in", background: .blue){
+                            viewModel.login()
+                        }.padding()
+                    }.scrollContentBackground(.hidden)
+                    
+                    /*
+                    if let image = UIImage(named: "pngIcon") {
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: 160, height: 160)
+                            .aspectRatio(contentMode: .fit)
+                    } else {
+                        Text("Image not found")
+                    }
+                    */ // i have some problems with sys keyboard casting
+                    
+                    // create account
+                    VStack {
+                        Text("Don't have an acc yet?")
+                        NavigationLink("Register here", destination: RegisterView()) // jump to register form
+                    }.padding(.bottom, 15)
+                }.padding(.top, 180)
+            }
         }
     }
 }

@@ -35,16 +35,17 @@ struct RegisterView: View {
                         viewModel.register()
                     }.padding()
                 }.scrollContentBackground(.hidden)
-                
+                /*
                 if let image = UIImage(named: "pngIcon") {
-                            Image(uiImage: image)
-                                .resizable()
-                                .frame(width: 160, height: 160)
-                                .aspectRatio(contentMode: .fit)
-                        } else {
-                            Text("Image not found")
-                        }
-
+                 Image(uiImage: image)
+                     .resizable()
+                     .frame(width: 160, height: 160)
+                     .aspectRatio(contentMode: .fit)
+                } else {
+                    Text("Image not found")
+                 }
+                 */ // i have some problems with sys keyboard casting
+                
             }.padding(.top, 140)
         }
     }

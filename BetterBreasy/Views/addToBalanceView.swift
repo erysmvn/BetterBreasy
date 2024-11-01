@@ -28,7 +28,7 @@ struct addToBalanceView: View {
                     HStack {
                         TextField("0.00 ", text: $viewModel.howMuch)
                             .textFieldStyle(PlainTextFieldStyle())
-                            .keyboardType(.decimalPad)
+                            .keyboardType(.numberPad) // idk why but firebase ignores float values atm, i'll prob change my db
                         Text("€")
                             .foregroundColor(.secondary)
                     }.padding()

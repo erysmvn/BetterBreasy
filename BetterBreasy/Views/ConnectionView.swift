@@ -18,7 +18,7 @@ struct ConnectionView: View {
     
     @State private var currentNum: String = ""
     @State private var errMsg: String = ""
-    @State private var balance: Double = 2 // test
+    //@State private var balance: Double = 2 // test
     
     var body: some View {
         VStack {

@@ -12,6 +12,7 @@ import FirebaseFirestore
 class ConnectionViewViewModel: ObservableObject {
     @Published var itemNumber = ""
     @Published var currentBalance: Double = 0.00
+    // actually those two var are not so essential atm
     @Published var showAlert = false
     
     init() {}
@@ -26,7 +27,7 @@ class ConnectionViewViewModel: ObservableObject {
         db.collection("users")
             .document(uid)
             .updateData([
-                "balance": FieldValue.increment(Int64(-1))
+                "balance": FieldValue.increment(Int64(-1)) // replace -1 with the price of the item we r buying
             ]) { error in
                 if let error = error {
                     print("Error updating balance: \(error)") // debug
