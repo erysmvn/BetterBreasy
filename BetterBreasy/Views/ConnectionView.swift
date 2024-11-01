@@ -85,13 +85,14 @@ struct ConnectionView: View {
                     if currentNum.count < 2 {
                         errMsg = "Please insert 2 digits"
                         viewModel.showAlert = true
-                    } else if balance <= 0.00 { // WARN: balance is for test, use userBalance
+                    } else if userBalance <= 0.00 { // WARN: balance is for test, use userBalance
                         errMsg = "No enough credit"
                         viewModel.showAlert = true
                     } else {
                         viewModel.itemNumber = currentNum
                         viewModel.currentBalance = userBalance
                         // call the buy func
+                        viewModel.buyItem()
                         isPresentingConnection = false
                     }
                 }

@@ -12,21 +12,18 @@ import FirebaseFirestore
 class newItemViewViewModel: ObservableObject {
     @Published var number = ""
     @Published var type = ""
+
     @Published var showAlert = false
-    
     init() {}
     
     func save() {
         guard canSave else {
             return
         }
-        // get current user id
-        guard let uId = Auth.auth().currentUser?.uid else {
-            return
-        }
         
         // create a model
-        let newId = UUID().uuidString
+        let newId = UUID().uuidString // create unique ID
+        // WARN: machines are not ordered by name, but by this ID
         let newItem = VendingMachineItem(
             id: newId,
             number: number,
@@ -38,12 +35,6 @@ class newItemViewViewModel: ObservableObject {
         db.collection("machines")
             .document(newId)
             .setData(newItem.asDictionary()) // dictionary
-        /*let db = Firestore.firestore()
-        db.collection("users")
-            .document(uId)
-            .collection("machines")
-            .document(newId)
-            .setData(newItem.asDictionary()) // dictionary*/
     }
     
     var canSave: Bool {

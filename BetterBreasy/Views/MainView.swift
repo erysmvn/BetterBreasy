@@ -28,7 +28,7 @@ struct MainView: View {
     @ViewBuilder
     var accountView: some View {
         TabView {
-            VendingMachinesView(/*userId: viewModel.currentUserId*/).tabItem() {
+            VendingMachinesView().tabItem() {
                 Label("Home", systemImage: "house")
             }
             ProfileView().tabItem() {

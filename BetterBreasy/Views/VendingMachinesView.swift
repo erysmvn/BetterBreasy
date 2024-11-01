@@ -16,11 +16,7 @@ struct VendingMachinesView: View {
     var isSuperUser: Bool {
         return userSigned.user?.superuser ?? false
     }
-    /*
-    init(userId: String) {
-        self._items = FirestoreQuery(collectionPath: "users/\(userId)/machines")
-    }
-    */
+    
     init() {
         self._items = FirestoreQuery(collectionPath: "machines")
     }
@@ -74,7 +70,6 @@ struct VendingMachinesView: View {
 }
 
 #Preview {
-    //VendingMachinesView(userId: "gDTSC8vpmCS51lWwPi8ZedEEUQt2")
     VendingMachinesView()
 }
  

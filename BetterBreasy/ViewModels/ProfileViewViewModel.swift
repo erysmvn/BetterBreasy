@@ -11,6 +11,8 @@ import FirebaseAuth
 
 class ProfileViewViewModel: ObservableObject {
     
+    @Published var showingBalance = false
+    
     @Published var user: User? = nil
     
     func fetchUser() {

@@ -28,7 +28,7 @@ struct ProfileView: View {
                             Text("Balance: ").bold()
                             Text(String(format: "%.2f €", user.balance))
                             Button {
-                                // action
+                                viewModel.showingBalance = true
                             } label: {
                                 Text("Add to balance").foregroundColor(Color.blue)
                                 /*RoundedRectangle(cornerRadius: 20)
@@ -36,6 +36,8 @@ struct ProfileView: View {
                                     .frame(width: 120, height: 40)*/
                             }
                             Spacer()
+                        }.sheet(isPresented: $viewModel.showingBalance) {
+                            addToBalanceView(isPresentingBalance: $viewModel.showingBalance)
                         }
                         HStack {
                             Text("Joined: ").bold()

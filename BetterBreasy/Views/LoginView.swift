@@ -40,8 +40,17 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Text("Login Here:")
+                    .font(.system(size: 50))
+                    .bold()
+                    .padding(.bottom, 2)
+                Text("Better-Breasy")
+                    .font(.system(size: 25))
+                    .bold()
+                    .opacity(0.60)
+                    .padding(.bottom, 10)
+                Spacer()
                 // login form
-                
                 Form {
                     if !viewModel.errMsg.isEmpty {
                         Text(viewModel.errMsg).foregroundColor(Color.red)
@@ -57,12 +66,21 @@ struct LoginView: View {
                     }.padding()
                 }.scrollContentBackground(.hidden)
                 
+                if let image = UIImage(named: "pngIcon") {
+                            Image(uiImage: image)
+                                .resizable()
+                                .frame(width: 160, height: 160)
+                                .aspectRatio(contentMode: .fit)
+                        } else {
+                            Text("Image not found")
+                        }
+
+                
                 // create account
                 VStack {
                     Text("Don't have an acc yet?")
                     NavigationLink("Register here", destination: RegisterView()) // jump to register form
                 }.padding(.bottom, 15)
-                Spacer().navigationTitle("Better-Breasy☕")
             }.padding(.top, 180)
         }
     }
